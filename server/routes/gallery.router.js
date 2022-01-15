@@ -1,24 +1,50 @@
 const express = require('express');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
+const pool = require('../modules/pool')
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
-// PUT Route
-router.put('/like/:id', (req, res) => {
-    console.log(req.params);
-    const galleryId = req.params.id;
-    for(const galleryItem of galleryItems) {
-        if(galleryItem.id == galleryId) {
-            galleryItem.likes += 1;
-        }
-    }
-    res.sendStatus(200);
-}); // END PUT Route
 
-// GET Route
+// GET route
 router.get('/', (req, res) => {
-    res.send(galleryItems);
-}); // END GET Route
+    const queryText=`
+        SELECT * FROM "gallery"
+        `;
+
+    pool.query(queryText)
+        .then((result) => {
+            console.log('data from DB is:', result);
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log('DB query error', error);
+            res.sendStatus(500);
+        })
+}) // end GET route
+
+
+
+// PUT Route
+router.put('/:id', (req, res) => {
+    const queryText = `
+        UPDATE "gallery"
+        SET "likes" = $1
+        WHERE "id" = $2
+    `;
+
+    const queryParams = [
+        req.params.id
+    ];
+
+    pool.query(queryText, queryParams)
+        .then((result) => {
+            console.log('likes increased');
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('PUT /gallery error', error);
+            
+        })
+}); // end PUT Route
 
 module.exports = router;
