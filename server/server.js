@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const gallery = require('./routes/gallery.router.js');
 const galleryRouter = require('./routes/gallery.router.js');
 const PORT = process.env.PORT || 5000;
 

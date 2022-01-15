@@ -1,7 +1,6 @@
 const express = require('express');
-const { Pool } = require('pg/lib');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
+const pool = require('../modules/pool')
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
@@ -46,7 +45,6 @@ router.put('/:id', (req, res) => {
             console.log('PUT /gallery error', error);
             
         })
-})
 }); // end PUT Route
 
 module.exports = router;

@@ -1,10 +1,10 @@
 import GalleryItem from "../GalleryItem/GalleryItem"
 
-function GalleryList({galleryItems, onLike}) {
+function GalleryList({list, onLike}) {
 
     return(
         <div className='pics-list'>
-            {galleryItems.map((item) => (
+            {list.map((item) => (
                 <GalleryItem
                     key={item.id}
                     item={item}
