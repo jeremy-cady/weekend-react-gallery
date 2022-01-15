@@ -1,5 +1,18 @@
-function GalleryItem({item, onLike}) {
+import { useState } from 'react';
+
+function GalleryItem({item, markLiked, fetchGallery}) {
     console.log('item is:', item);
+
+    let likesCount = 0;
+
+    const [isLiked, setIsLiked] = useState(item.likes); 
+
+    const markItemLiked = (item) => {
+        console.log('inside markItemLiked');
+        markLiked(item.id);
+        setIsLiked(likesCount++);
+        fetchGallery();
+    }
 
     return(
         <>
@@ -8,6 +21,10 @@ function GalleryItem({item, onLike}) {
                     src={item.path}    
                 />
 
+            </div>
+            <div>
+                <button onClick={() => {markItemLiked(item)}}>👍</button>
+                Likes: {likesCount}
             </div>
         </>
         

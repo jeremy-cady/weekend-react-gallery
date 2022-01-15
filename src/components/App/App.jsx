@@ -26,6 +26,21 @@ function App() {
   }
 
 
+  const markLiked = (id) => {
+    console.log('in markLiked');
+
+    axios({
+      method: 'PUT',
+      url: `/gallery/${id}`
+    }).then(response => {
+      console.log('PUT /gallery success!', response);
+      fetchGallery();
+    }).catch((error) => {
+      console.log('PUT /gallery error', error);
+    })
+  }
+
+
 
 
 
@@ -36,6 +51,7 @@ function App() {
         <GalleryList
           list={galleryList}  
           fetchGallery={fetchGallery}
+          markLiked={markLiked}
         />
       </div>
     );

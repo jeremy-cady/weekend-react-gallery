@@ -1,6 +1,6 @@
 import GalleryItem from "../GalleryItem/GalleryItem"
 
-function GalleryList({list, onLike}) {
+function GalleryList({list, markLiked, fetchGallery}) {
 
     return(
         <div className='pics-list'>
@@ -8,7 +8,8 @@ function GalleryList({list, onLike}) {
                 <GalleryItem
                     key={item.id}
                     item={item}
-                    onLike={onLike}
+                    markLiked={markLiked}
+                    fetchGallery={fetchGallery}
                 />
             ))}
         </div>
