@@ -41,7 +41,7 @@ function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsCl
                     {display}
                 </div>
                 <div>
-                    <button onClick={() => {markItemLiked(item)}}>👍</button>
+                    <button className="likeButton" onClick={() => {markItemLiked(item)}}>👍</button>
                     Likes: {item.likes}
                 </div>
             </div>
