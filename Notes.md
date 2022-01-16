@@ -24,12 +24,12 @@ TODO
         [x] create GalleryItems (objects)
     [x] Pass gallery items to `GalleryItem.js` via `props`
         [x] Update  `GalleryList` to use `GalleryItem` to display an image
-        [ ] Swap the image with the description on click
-            [x] Use conditional rendering
-            [x] [conditional rendering](https://reactjs.org/docs/conditional-rendering.html.
+        [x] Swap the image with the description on click
+            [ ] Use conditional rendering
+            [ ] [conditional rendering](https://reactjs.org/docs/conditional-rendering.html.
         [x] Display the number of likes for each item 
             [x] include a 'like' button
         [x] On 'like' button click
-            [ ] use Axios to updte `PUT` with the 'like' count
+            [x] use Axios to update `PUT` with the 'like' count
             [x] `/gallery/like/:id`
             [x] Update the gallery every time the like button is clicked

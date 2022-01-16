@@ -5,22 +5,8 @@ function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsCl
     console.log('item is:', item);
     console.log('description is:', item.description);
 
-    const renderImage = <img 
-                            className="image" 
-                            src={item.path} 
-                            onClick={() => {markItemIsClickedTrue(item)}}
-                        />;
-    const renderText = <p 
-                            className="text" 
-                            onClick={() => {markItemIsClickedFalse(item)}}
-                        >
-                            {item.description}
-                        </p>;
-
-
     const [likesCount, setLikesCount] = useState(item.likes); 
-    const [display, setDisplay] = useState(renderImage);
-    const [isClicked, setIsClicked] = useState(item.isClicked);
+    const [display, setDisplay] = useState(<img className="image" src={item.path} onClick={() => {markItemIsClickedTrue(item)}}/>);
    
 
     const markItemLiked = (item) => {
@@ -34,27 +20,16 @@ function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsCl
     const markItemIsClickedTrue = (item) => {
         console.log('inside markItemClickedTrue');
         markIsClickedTrue(item.id);
-        setIsClicked(item.isClicked);
-        setDisplayValue();
+        setDisplay(<p className="text" onClick={() => {markItemIsClickedFalse(item)}}>{item.description}</p>);
         fetchGallery();
     }
 
     
     const markItemIsClickedFalse = (item) => {
         console.log('markItemClickedFalse');
+        setDisplay(<img className="image" src={item.path} onClick={() => {markItemIsClickedTrue(item)}}/>)
         markIsClickedFalse(item.id);
-        setIsClicked(item.isClicked);
-        setDisplayValue();
         fetchGallery();
-    }
-
-    const setDisplayValue = (item) => {
-        if (isClicked===false) {
-            setDisplay(renderImage);
-        }
-        else if (isClicked===true) {
-            setDisplay(renderText);
-        }
     }
 
   
@@ -66,7 +41,7 @@ function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsCl
                     {display}
                 </div>
                 <div>
-                    <button className="likeButton" onClick={() => {markItemLiked(item)}}>👍</button>
+                    <button onClick={() => {markItemLiked(item)}}>👍</button>
                     Likes: {item.likes}
                 </div>
             </div>
