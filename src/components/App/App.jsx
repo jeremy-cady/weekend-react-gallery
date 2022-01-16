@@ -31,13 +31,13 @@ function App() {
 
     axios({
       method: 'PUT',
-      url: `/gallery/${id}`
+      url: `/gallery/likes/${id}`
     }).then(response => {
       console.log('PUT /gallery success!', response);
       fetchGallery();
     }).catch((error) => {
       console.log('PUT /gallery error', error);
-    })
+    });
   }
 
 
