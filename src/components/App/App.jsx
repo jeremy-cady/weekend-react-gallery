@@ -22,7 +22,7 @@ function App() {
       setGalleryList(response.data);
     }).catch((error) => {
       console.log('GET /gallery failed', error);
-    })
+    });
   }
 
 
@@ -33,7 +33,7 @@ function App() {
       method: 'PUT',
       url: `/gallery/likes/${id}`
     }).then(response => {
-      console.log('PUT /gallery success!', response);
+      console.log('PUT /gallery/likes success!', response);
       fetchGallery();
     }).catch((error) => {
       console.log('PUT /gallery error', error);
@@ -42,7 +42,35 @@ function App() {
 
 
 
+  const markIsClickedTrue = (id) => {
+    console.log('in markIsClickedTrue');
 
+    axios({
+      method: 'PUT',
+      url: `/gallery/isClickedTrue/${id}`
+    }).then(response => {
+      console.log('PUT /gallery/isClickedTrue success!', response);
+      fetchGallery();
+    }).catch((error) => {
+      console.log('PUT /gallery/isClickedTrue error', error);
+    });
+  }
+
+
+
+  const markIsClickedFalse = (id) => {
+    console.log('in markIsClickedFalse');
+
+    axios({
+      method: 'PUT',
+      url: `/gallery/isClickedFalse/${id}`
+    }).then(response => {
+      console.log('PUT /gallery/isClickedFalse success!', response);
+      fetchGallery();
+    }).catch((error) => {
+      console.log('PUT /gallery/isClickedFalse error', error);
+    });
+  }
 
 
     return (
@@ -52,6 +80,8 @@ function App() {
           list={galleryList}  
           fetchGallery={fetchGallery}
           markLiked={markLiked}
+          markIsClickedTrue={markIsClickedTrue}
+          markIsClickedFalse={markIsClickedFalse}
         />
       </div>
     );

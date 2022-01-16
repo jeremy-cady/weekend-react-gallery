@@ -49,4 +49,48 @@ router.put('/likes/:id', (req, res) => {
 }); // end PUT /likes route
 
 
+router.put('/isClickedTrue/:id', (req, res) => {
+    const queryText = `
+        UPDATE "gallery"
+        SET "isClicked" = true
+        WHERE "id" = $1;
+    `;
+
+    const queryParams = [
+        req.params.id
+    ];
+
+    pool.query(queryText, queryParams)
+        .then((result) => {
+            console.log('item clicked to true');
+            res.sendStatus(200);            
+        })
+        .catch((error) => {
+            console.log('PUT /gallery error', error);
+            res.sendStatus(500);
+        })
+})
+
+
+router.put('/isClickedFalse/:id', (req, res) => {
+    const queryText = `
+        UPDATE "gallery"
+        SET "isClicked" = false
+        WHERE "id" = $1;
+    `;
+
+    const queryParams = [
+        req.params.id
+    ];
+
+    pool.query(queryText, queryParams)
+        .then((result) => {
+            console.log('item clicked to false');
+            res.sendStatus(200);            
+        })
+        .catch((error) => {
+            console.log('PUT /gallery error', error);
+            res.sendStatus(500);
+        })
+})
 module.exports = router;

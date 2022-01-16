@@ -1,6 +1,6 @@
 import GalleryItem from "../GalleryItem/GalleryItem"
 
-function GalleryList({list, markLiked, fetchGallery}) {
+function GalleryList({list, markLiked, fetchGallery, markIsClickedTrue, markIsClickedFalse}) {
 
     return(
         <div className='pics-list'>
@@ -10,6 +10,8 @@ function GalleryList({list, markLiked, fetchGallery}) {
                     item={item}
                     markLiked={markLiked}
                     fetchGallery={fetchGallery}
+                    markIsClickedTrue={markIsClickedTrue}
+                    markIsClickedFalse={markIsClickedFalse}
                 />
             ))}
         </div>
