@@ -9,6 +9,7 @@ const pool = require('../modules/pool')
 router.get('/', (req, res) => {
     const queryText=`
         SELECT * FROM "gallery"
+        ORDER BY "id" ASC
         `;
 
     pool.query(queryText)
@@ -25,15 +26,15 @@ router.get('/', (req, res) => {
 
 
 // PUT Route
-router.put('/:id', (req, res) => {
+router.put('/likes/:id', (req, res) => {
     const queryText = `
         UPDATE "gallery"
-        SET "likes" = $1
-        WHERE "id" = $2
+        SET "likes" = (likes + 1)
+        WHERE "id" = $1
     `;
 
     const queryParams = [
-        req.params.id
+        req.params.id,
     ];
 
     pool.query(queryText, queryParams)
@@ -45,6 +46,7 @@ router.put('/:id', (req, res) => {
             console.log('PUT /gallery error', error);
             
         })
-}); // end PUT Route
+}); // end PUT /likes route
+
 
 module.exports = router;
