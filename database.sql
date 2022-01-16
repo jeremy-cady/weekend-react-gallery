@@ -2,7 +2,8 @@ CREATE TABLE "gallery" (
     "id" SERIAL PRIMARY KEY,
     "path" VARCHAR (250),
     "description" VARCHAR (250),
-    "likes" INTEGER
+    "likes" INTEGER,
+    "isClicked" BOOLEAN DEFAULT FALSE
 );
 
 

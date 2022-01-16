@@ -1,0 +1,21 @@
+.picsList-item {
+    flex-direction: column;
+}
+
+.image {
+    border: 5px solid black;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+.text {
+    width: 200px;
+    height: 200px;
+}
+
+.likeButton {
+    margin-right: 10px;
+    margin-left: 10px;
+}

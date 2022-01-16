@@ -1,11 +1,26 @@
 import { useState } from 'react';
+import './GalleryItem.css';
 
 function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsClickedFalse}) {
     console.log('item is:', item);
     console.log('description is:', item.description);
 
+    const renderImage = <img 
+                            className="image" 
+                            src={item.path} 
+                            onClick={() => {markItemIsClickedTrue(item)}}
+                        />;
+    const renderText = <p 
+                            className="text" 
+                            onClick={() => {markItemIsClickedFalse(item)}}
+                        >
+                            {item.description}
+                        </p>;
+
+
     const [likesCount, setLikesCount] = useState(item.likes); 
-    const [display, setDisplay] = useState(<img src={item.path} onClick={() => {markItemIsClickedTrue(item)}}/>);
+    const [display, setDisplay] = useState(renderImage);
+    const [isClicked, setIsClicked] = useState(item.isClicked);
    
 
     const markItemLiked = (item) => {
@@ -19,28 +34,41 @@ function GalleryItem({item, markLiked, fetchGallery, markIsClickedTrue, markIsCl
     const markItemIsClickedTrue = (item) => {
         console.log('inside markItemClickedTrue');
         markIsClickedTrue(item.id);
-        setDisplay(<p onClick={() => {markItemIsClickedFalse(item)}}>{item.description}</p>);
+        setIsClicked(item.isClicked);
+        setDisplayValue();
         fetchGallery();
     }
 
     
     const markItemIsClickedFalse = (item) => {
         console.log('markItemClickedFalse');
-        setDisplay(<img src={item.path} onClick={() => {markItemIsClickedTrue(item)}}/>)
         markIsClickedFalse(item.id);
+        setIsClicked(item.isClicked);
+        setDisplayValue();
         fetchGallery();
+    }
+
+    const setDisplayValue = (item) => {
+        if (isClicked===false) {
+            setDisplay(renderImage);
+        }
+        else if (isClicked===true) {
+            setDisplay(renderText);
+        }
     }
 
   
 
     return(
         <>
-            <div id='picsList-item'>
-                {display}
-            </div>
-            <div>
-                <button onClick={() => {markItemLiked(item)}}>👍</button>
-                Likes: {item.likes}
+            <div className='picsList-item'>
+                <div>
+                    {display}
+                </div>
+                <div>
+                    <button className="likeButton" onClick={() => {markItemLiked(item)}}>👍</button>
+                    Likes: {item.likes}
+                </div>
             </div>
         </>
         
